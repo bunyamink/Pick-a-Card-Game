@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "Base.h"
+#include "Blue.h"
 using namespace std;
 
 class Hetlist{
@@ -9,24 +10,47 @@ class Hetlist{
     public:
         Hetlist(){head = 0;}
         void _insert(Base *);
-        void display();
+        void displayResult();
 };
+
+void Hetlist::_insert(Base * b){
+    if(head){
+        b->next = head; // if list is not empty
+    }else{
+        b->next = 0; // if empty insert first element zero
+    }
+    head = b;
+}
+
+void Hetlist::displayResult(){
+    Base * basePtr;
+    if(head){
+        basePtr = head;
+        while(basePtr){
+            basePtr->print();
+            basePtr = basePtr->next;
+        }
+    }else{
+        cout << "List is empty" << endl;
+    }
+}
 
 int main()
 {
-    char data[100];
-    /*Base::outcome result;
+    Hetlist hetlist;
+    Blue *blue1 = new Blue("Blue1", 2);
+    hetlist._insert(blue1);
+    hetlist.displayResult();
+
+    /*char data[100];
+    Base::outcome result;
     result = Base::Tie;
     cout << result << endl;*/
-    string line;
+    /*string line;
     ifstream file("deck.txt");
     file >> data;
     cout << data;
-    file >> data;
-    cout << data << endl;
-
-   // close the opened file.
-   file.close();
+    file.close();*/
 
     /*if(file.is_open()){
         while(std::getline(file,line)){
