@@ -5,7 +5,8 @@ using namespace std;
 
 class Green: public Base{
     public:
-        int compare();
+        int compare(char &){};
 };
+
 
 #endif

@@ -5,7 +5,8 @@ using namespace std;
 
 class Red: public Base{
     public:
-        virtual int compare();
+        virtual int compare(char &){};
 };
+
 
 #endif

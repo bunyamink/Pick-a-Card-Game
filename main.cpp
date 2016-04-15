@@ -3,14 +3,17 @@
 #include <fstream>
 #include "Base.h"
 #include "Blue.h"
+#include "Red.h"
+#include "Darkred.h"
+#include "Green.h"
 using namespace std;
 
 class Hetlist{
-    Base *head;
     public:
+        Base *head;
         Hetlist(){head = 0;}
         void _insert(Base *);
-        void displayResult();
+        //void displayResult();
 };
 
 void Hetlist::_insert(Base * b){
@@ -22,10 +25,12 @@ void Hetlist::_insert(Base * b){
     head = b;
 }
 
-void Hetlist::displayResult(){
+void displayResult(Hetlist *);
+
+void displayResult(Hetlist *ht){
     Base * basePtr;
-    if(head){
-        basePtr = head;
+    if(ht->head){
+        basePtr = ht->head;
         while(basePtr){
             basePtr->print();
             basePtr = basePtr->next;
@@ -37,29 +42,63 @@ void Hetlist::displayResult(){
 
 int main()
 {
-    Hetlist hetlist;
-    Blue *blue1 = new Blue("Blue1", 2);
-    hetlist._insert(blue1);
-    hetlist.displayResult();
+    Hetlist hetlist1;
+    Hetlist hetlist2;
+    //Blue *blue1 = new Blue();
+    //hetlist._insert(new Blue());
+    //displayResult(&hetlist);
 
-    /*char data[100];
-    Base::outcome result;
+    /*Base::outcome result;
     result = Base::Tie;
     cout << result << endl;*/
-    /*string line;
-    ifstream file("deck.txt");
-    file >> data;
-    cout << data;
-    file.close();*/
 
-    /*if(file.is_open()){
-        while(std::getline(file,line)){
-            cout << line << endl;
+    char data[100];
+    char p1[20];
+    char p2[20];
+    ifstream file("deck.txt");
+    int i = 0;
+    while(file.peek()!='\n'){
+        file >> data[i];
+        p1[i] = data[i];
+        i++;
+    }
+    i = 0;
+    while(!file.eof()){
+        file >> data[i];
+        p2[i] = data[i];
+        i++;
+    }
+    file.close();
+
+    cout << "Player1: ";
+    for(i = 0; i < 10; i++){
+        cout << p1[i] << " ";
+        if(p1[i] == 'R'){
+            hetlist1._insert(new Red());
+        }else if(p1[i] == 'D'){
+            hetlist1._insert(new Darkred());
+        }else if(p1[i] == 'G'){
+            hetlist1._insert(new Green());
+        }else{
+            hetlist1._insert(new Blue());
         }
-        file.close();
-    }else{
-        cout << "Deck.txt is not open" << endl;
-    }*/
+    }
+
+    cout << "\nPlayer2: ";
+    for(i = 0; i < 10; i++){
+        cout << p2[i] << " ";
+        if(p2[i] == 'R'){
+            hetlist2._insert(new Red());
+        }else if(p2[i] == 'D'){
+            hetlist2._insert(new Darkred());
+        }else if(p2[i] == 'G'){
+            hetlist2._insert(new Green());
+        }else{
+            hetlist2._insert(new Blue());
+        }
+    }
+
+
 
     return 0;
 }

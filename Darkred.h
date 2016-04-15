@@ -5,7 +5,8 @@ using namespace std;
 
 class Darkred: public Red{
     public:
-        int compare();
+        int compare(char &){};
 };
+
 
 #endif
